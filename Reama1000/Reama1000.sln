@@ -1,0 +1,37 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31313.79
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Reama1000", "Reama1000\Reama1000.csproj", "{C51DD161-3C25-4AD7-AB59-99F3D3F94562}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InterfaceModels", "Models\InterfaceModels.csproj", "{47413A3E-8B31-4C96-AF69-5192002ABC1A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataBase", "DataBase\DataBase.csproj", "{A903497B-0810-43BB-9DB8-CBE3365D434F}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{C51DD161-3C25-4AD7-AB59-99F3D3F94562}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C51DD161-3C25-4AD7-AB59-99F3D3F94562}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C51DD161-3C25-4AD7-AB59-99F3D3F94562}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C51DD161-3C25-4AD7-AB59-99F3D3F94562}.Release|Any CPU.Build.0 = Release|Any CPU
+		{47413A3E-8B31-4C96-AF69-5192002ABC1A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{47413A3E-8B31-4C96-AF69-5192002ABC1A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{47413A3E-8B31-4C96-AF69-5192002ABC1A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{47413A3E-8B31-4C96-AF69-5192002ABC1A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A903497B-0810-43BB-9DB8-CBE3365D434F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A903497B-0810-43BB-9DB8-CBE3365D434F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A903497B-0810-43BB-9DB8-CBE3365D434F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A903497B-0810-43BB-9DB8-CBE3365D434F}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {F9388110-B080-4E40-B987-9B003751353A}
+	EndGlobalSection
+EndGlobal
