@@ -10,6 +10,7 @@ namespace DataBase
         public DbSet<Kategorier> Kategoriers { get; set; }
         public DbSet<Leveandør> Leveandørs { get; set; }
         public DbSet<Produkter> Produkters { get; set; }
+        public DbSet<ProduktKategorier> produktKategoriers { get; set; }
         public Reama1000Context()
         {
         }
@@ -18,10 +19,22 @@ namespace DataBase
         }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            if (!optionsBuilder.IsConfigured)
-                optionsBuilder.UseSqlServer(
-                    "Data Source=LAPTOP-U3V1724K;Initial Catalog=Reama1000;Integrated Security=True");
+            optionsBuilder.UseInMemoryDatabase("Reama1000");
             base.OnConfiguring(optionsBuilder);
+        }
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder
+                .Entity<Produkter>()
+                .HasMany(p => p.kategoriers)
+                .WithMany(p => p.Produkters)
+                .UsingEntity<ProduktKategorier>(
+                    j => j.HasOne(pk => pk.Kategori)
+                         .WithMany(t => t.produktKategoriers)
+                         .HasForeignKey(pk => pk.KategoriId),
+                    j => j.HasOne(pk => pk.Produkt)
+                         .WithMany(t => t.produktKategoriers)
+                         .HasForeignKey(pk => pk.ProduktId));
         }
     }
 }

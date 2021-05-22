@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text.Json.Serialization;
 using System.Threading.Tasks;
@@ -22,10 +23,13 @@ namespace DataBase.Models
         [Required]
         public double Mængde { get; set; }
         [Required]
-        public IEnhed Enhde { get; set; }
+        public Enhed Enhde { get; set; }
         [Required]
         public double Pris { get; set; }
+        [NotMapped]
         public List<Kategorier> kategoriers { get; set; }
+        [JsonIgnore]
+        public List<ProduktKategorier> produktKategoriers { get; set; }
         [Required]
         public int Antal { get; set; }
         [Required]

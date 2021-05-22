@@ -1,3 +1,7 @@
+using DataBase;
+using DataBase.CRUD;
+using DataBase.Models;
+using DataBase.Interfaces;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -26,7 +30,14 @@ namespace Reama1000
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services
+                .AddEntityFrameworkInMemoryDatabase()                
+                .AddDbContext<Reama1000Context>();
 
+            services.AddTransient<IDataBase<Kategorier, Guid>, ModelingKategorier>();
+            services.AddTransient<IDataBase<Leveandør, Guid>, ModelingLeveandør>();
+            services.AddTransient<IDataBase<Produkter, Guid>, ModelingProdukter>();
+            services.AddTransient<IDataBase<Enhed, int>, ModelingEnhed>();
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {
@@ -43,7 +54,7 @@ namespace Reama1000
                 app.UseSwagger();
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "Reama1000 v1"));
             }
-
+            app.Seed();
             app.UseHttpsRedirection();
 
             app.UseRouting();
