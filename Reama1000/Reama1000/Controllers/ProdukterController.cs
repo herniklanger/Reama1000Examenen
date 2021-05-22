@@ -39,9 +39,11 @@ namespace Reama1000.Controllers
             return result;
         }
         [HttpPost]
-        public async void PostAsync([FromBody] Produkter Create)
+        public async Task<Produkter> PostAsync([FromBody] Produkter Create)
         {
             await _Database.CreateAsync(Create);
+            Create.kategoriers.ForEach(x => x.Produkters = null);
+            return Create;
         }
         [HttpDelete]
         public async void DeleteAsync([FromQuery]Guid Id)
