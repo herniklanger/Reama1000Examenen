@@ -28,7 +28,7 @@ namespace Reama1000.Controllers
         public async Task<Produkter> Get( Guid Id)
         {
             List <Produkter> prod = await _Database.ReadAsync(x => x.Id == Id);
-            prod.ForEach(x => x.kategoriers.ForEach(p => p.Produkters = null));
+            prod.ForEach(x => x.kategoriers.ForEach(x=>x.Produkters = null));
             return (prod)[0];
         }
         [HttpPut]

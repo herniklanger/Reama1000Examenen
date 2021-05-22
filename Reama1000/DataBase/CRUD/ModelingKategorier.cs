@@ -28,7 +28,7 @@ namespace DataBase.CRUD
             var context = _Context.Kategoriers
                 .Include(x => x.produktKategoriers)
                 .ThenInclude(pk=>pk.Produkt)
-                .ThenInclude(p => p.Enhde);
+                .ThenInclude(p => p.Enhed);
             List<Kategorier> List = (await context.ToListAsync()).FindAll(x => search(x));
             List.ForEach(async x => x.Produkters = await GetAllProduktsAsync(x.produktKategoriers));
             return List;

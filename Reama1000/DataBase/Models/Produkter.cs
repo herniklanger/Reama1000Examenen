@@ -14,25 +14,25 @@ namespace DataBase.Models
         [Key]
         [JsonIgnore]
         public int InternalId { get; set; }
-        [Required]
+        
         public Guid Id { get; set; }
-        [Required]
+        
         public string Navn { get; set; }
-        [Required]
+        
         public string Beskrivelse { get; set; }
-        [Required]
+        
         public double Mængde { get; set; }
-        [Required]
-        public Enhed Enhde { get; set; }
-        [Required]
+        
+        public Enhed Enhed { get; set; }
+        
         public double Pris { get; set; }
         [NotMapped]
         public List<Kategorier> kategoriers { get; set; }
         [JsonIgnore]
         public List<ProduktKategorier> produktKategoriers { get; set; }
-        [Required]
+        
         public int Antal { get; set; }
-        [Required]
-        public Leveandør Leveandør { get; set; }
+        
+        public Leveandør Leverandør { get; set; }
     }
 }

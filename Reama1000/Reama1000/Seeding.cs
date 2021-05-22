@@ -37,8 +37,8 @@ namespace DataBase
                         Mængde = 2,
                         Navn = "Dansk Dansk Hvedeme",
                         Pris = 19.95,
-                        Enhde = Kg,
-                        Leveandør = leveandør,
+                        Enhed = Kg,
+                        Leverandør = leveandør,
                         kategoriers = new List<Kategorier>{ kategorier1 , kategorier2}
 
                     },
@@ -49,8 +49,8 @@ namespace DataBase
                         Mængde = 2,
                         Navn = "Kara Age",
                         Pris = 10.25,
-                        Enhde = Kg,
-                        Leveandør = leveandør,
+                        Enhed = Kg,
+                        Leverandør = leveandør,
                         kategoriers = new List<Kategorier>{ kategorier1 , kategorier2}
 
                     }

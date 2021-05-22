@@ -13,17 +13,11 @@ namespace DataBase.Models
         [Key]
         [JsonIgnore]
         public int InternalId { get; set; }
-        [Required]
         public Guid Id { get; set; }
-        [Required]
         public string Navn { get; set; }
-        [Required]
         public string Adresse { get; set; }
-        [Required]
         public int Postnummer { get; set; }
-        [Required]
         public string Email { get; set; }
-        [Required]
         public string Telefonnummer { get; set; }
     }
 }

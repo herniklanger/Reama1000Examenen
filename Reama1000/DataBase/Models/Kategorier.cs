@@ -14,11 +14,11 @@ namespace DataBase.Models
         
         [Key][JsonIgnore]
         public int InternalId { get; set; }
-        [Required]
+        
         public Guid Id { get; set; }
-        [Required]
+        
         public string Navn { get; set; }
-        [Required]
+        
         public string Beskrivelse { get; set; }
         [NotMapped]
         public List<Produkter> Produkters { get; set; }

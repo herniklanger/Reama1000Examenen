@@ -20,13 +20,13 @@ namespace DataBase.CRUD
         }
         public async Task<List<Produkter>> ReadAllAsync()
         {
-            return _Context.Produkters.Include(p => p.Enhde).ToList();
+            return _Context.Produkters.Include(p => p.Enhed).ToList();
         }
         public async Task<List<Produkter>> ReadAsync(Func<Produkter, bool> search)
         {
             var context = _Context.Produkters
-                .Include(p => p.Leveandør)
-                .Include(p => p.Enhde)
+                .Include(p => p.Leverandør)
+                .Include(p => p.Enhed)
                 .Include(p => p.produktKategoriers).ThenInclude(x => x.Kategori);
             List<Produkter> produkters = (await context.ToListAsync()).FindAll(x => search(x));
             produkters.ForEach(async x => x.kategoriers = await GetAllKategoriersAsync(x.produktKategoriers));
@@ -35,9 +35,10 @@ namespace DataBase.CRUD
         }
         public async Task CreateAsync(Produkter obj)
         {
-            obj.kategoriers = await FindAllExistingKategories(obj.kategoriers);
             obj.Id = Guid.NewGuid();
-            obj.Leveandør = await FindLeveandør(obj.Leveandør);
+            obj.Enhed = await EnhedEnhed(obj.Enhed);
+            obj.kategoriers = await FindAllExistingKategories(obj.kategoriers);
+            obj.Leverandør = await FindLeveandør(obj.Leverandør);
             await _Context.Produkters.AddAsync(obj);
             await _Context.SaveChangesAsync();
         }
@@ -48,7 +49,7 @@ namespace DataBase.CRUD
             {
                 p.Id = Guid.NewGuid();
                 p.produktKategoriers = p.kategoriers == null ? new List<ProduktKategorier>() : await FindKategoriers(p, p.kategoriers);
-                p.Leveandør = await FindLeveandør(p.Leveandør);
+                p.Leverandør = await FindLeveandør(p.Leverandør);
             }
             await _Context.Produkters.AddRangeAsync(obj);
             await _Context.SaveChangesAsync();
@@ -56,16 +57,16 @@ namespace DataBase.CRUD
         public async Task<Produkter> UpdateAsync(Produkter obj)
         {
             Produkter Old = await _Context.Produkters
-                .Include(p => p.Leveandør)
+                .Include(p => p.Leverandør)
                 .Include(p => p.produktKategoriers)
                 .ThenInclude(pk => pk.Kategori)
                 .FirstOrDefaultAsync(x => x.Id == obj.Id);
             Old.Navn = obj.Navn ?? Old.Navn;
             Old.Antal = obj.Antal > 0? Old.Antal : obj.Antal;
             Old.Beskrivelse = obj.Beskrivelse ?? Old.Beskrivelse;
-            Old.Enhde = obj.Enhde ?? Old.Enhde;
+            Old.Enhed = obj.Enhed == null ? Old.Enhed : await EnhedEnhed(obj.Enhed);
             Old.produktKategoriers = obj.kategoriers == null ? Old.produktKategoriers : await FindKategoriers(Old, obj.kategoriers);
-            Old.Leveandør = obj.Leveandør == null ? Old.Leveandør: await FindLeveandør(obj.Leveandør);
+            Old.Leverandør = obj.Leverandør == null ? Old.Leverandør: await FindLeveandør(obj.Leverandør);
             Old.Mængde = obj.Mængde > 0 ? Old.Mængde : obj.Mængde;
             Old.Pris = obj.Pris > 0 ? Old.Pris : obj.Pris;
             _Context.Produkters.Update(Old);
@@ -133,6 +134,10 @@ namespace DataBase.CRUD
                 }
             }
             return result;
+        }
+        private async Task<Enhed> EnhedEnhed(Enhed enhed)
+        {
+            return _Context.Enheds.FirstOrDefault(x=>x.Id == enhed.Id) ?? enhed;
         }
     }
 }
