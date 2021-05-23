@@ -26,7 +26,7 @@ namespace DataBase.CRUD
         }
         public async Task<List<Enhed>> ReadAsync(Func<Enhed, bool> search)
         {
-            return _Context.Enheds.ToList().FindAll(x => search(x));
+            return _Context.Where(search).ToList(); ;
         }
         public async Task CreateAsync(Enhed obj)
         {

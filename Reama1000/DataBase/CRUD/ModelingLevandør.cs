@@ -24,7 +24,7 @@ namespace DataBase.CRUD
         }
         public async Task<List<Leveandør>> ReadAsync(Func<Leveandør, bool> search)
         {
-            return _Context.Leveandørs.ToList().FindAll(x => search(x));
+            return _Context.Leveandørs.Where(search).ToList();
         }
         public async Task CreateAsync(Leveandør obj)
         {

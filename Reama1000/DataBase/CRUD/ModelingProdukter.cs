@@ -28,7 +28,7 @@ namespace DataBase.CRUD
                 .Include(p => p.Leverandør)
                 .Include(p => p.Enhed)
                 .Include(p => p.produktKategoriers).ThenInclude(x => x.Kategori);
-            List<Produkter> produkters = (await context.ToListAsync()).FindAll(x => search(x));
+            List<Produkter> produkters = context.Where(search).ToList();
             produkters.ForEach(async x => x.kategoriers = await GetAllKategoriersAsync(x.produktKategoriers));
             return produkters;
                 

@@ -29,7 +29,7 @@ namespace DataBase.CRUD
                 .Include(x => x.produktKategoriers)
                 .ThenInclude(pk=>pk.Produkt)
                 .ThenInclude(p => p.Enhed);
-            List<Kategorier> List = (await context.ToListAsync()).FindAll(x => search(x));
+            List<Kategorier> List = context.Where(search).ToList();
             List.ForEach(async x => x.Produkters = await GetAllProduktsAsync(x.produktKategoriers));
             return List;
         }
@@ -53,7 +53,7 @@ namespace DataBase.CRUD
         }
         public async Task<Kategorier> UpdateAsync(Kategorier obj)
         {
-            var context = _Context.Kategoriers.Include(x => x.produktKategoriers).ThenInclude(pk => pk.Produkt);
+            var context = _Context.Kategoriers.Include(x => x.produktKategoriers).ThenInclude(pk => pk.Produkt).ThenInclude(p=>p.Enhed);
             Kategorier Old = await context.FirstOrDefaultAsync(x => x.Id == obj.Id);
             Old.Navn = obj.Navn ?? Old.Navn;
             Old.Beskrivelse = obj.Beskrivelse ?? Old.Beskrivelse;
